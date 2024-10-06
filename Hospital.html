@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRINCE TITUS GENERAL HOSPITAL MANAGEMENT SYSTEM</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            color: #2e8b57;
+        }
+
+        header {
+            background-color: #2e8b57;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            border-bottom: 2px solid #2e8b57;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3e9f67;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .receipt {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .total {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2e8b57;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .logo {
+            width: 120px;
+        }
+
+        .footer img {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="hospital_logo.png" alt="Hospital Logo" class="logo">
+    <p>PRINCE TITUS GENERAL HOSPITAL MANAGEMENT SYSTEM</p>
+    <p>Your Health, Our Priority</p>
+</header>
+
+<div class="container">
+
+    <!-- Patient Registration Section -->
+    <div class="section" id="patient-registration">
+        <h2>Patient Registration</h2>
+        <form>
+            <label for="patientName">Name:</label>
+            <input type="text" id="patientName">
+
+            <label for="patientAge">Age:</label>
+            <input type="number" id="patientAge">
+
+            <label for="patientGender">Gender:</label>
+            <select id="patientGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="patientCondition">Condition:</label>
+            <textarea id="patientCondition"></textarea>
+
+            <label for="assignedDoctor">Doctor Assigned:</label>
+            <input type="text" id="assignedDoctor">
+
+            <button type="button" onclick="registerPatient()">Register Patient</button>
+        </form>
+    </div>
+
+    <!-- Consultation Room Section -->
+    <div class="section" id="consultation">
+        <h2>Consultation Room</h2>
+        <p>Consultation Fee: $50</p>
+        <button type="button" onclick="proceedToLab()">Send Patient to Lab</button>
+    </div>
+
+    <!-- Lab Section -->
+    <div class="section" id="lab">
+        <h2>Lab Tests</h2>
+        <form>
+            <label for="labTests">Lab Tests Required:</label>
+            <input type="text" id="labTests">
+            <p>Lab Test Fee: $100</p>
+            <button type="button" onclick="proceedToOrthopedics()">Send to Orthopedics</button>
+        </form>
+    </div>
+
+    <!-- Orthopedics Section -->
+    <div class="section" id="orthopedics">
+        <h2>Orthopedics</h2>
+        <form>
+            <label for="orthopedicsTreatment">Orthopedic Treatment:</label>
+            <input type="text" id="orthopedicsTreatment">
+            <p>Orthopedic Fee: $150</p>
+            <button type="button" onclick="proceedToInjectionRoom()">Send to Injection Room</button>
+        </form>
+    </div>
+
+    <!-- Injection Room Section -->
+    <div class="section" id="injection-room">
+        <h2>Injection Room</h2>
+        <form>
+            <label for="injection">Injection Administered:</label>
+            <input type="text" id="injection">
+            <p>Injection Fee: $30</p>
+            <button type="button" onclick="proceedToPharmacy()">Send to Pharmacy</button>
+        </form>
+    </div>
+
+    <!-- Pharmacy Section -->
+    <div class="section" id="pharmacy">
+        <h2>Pharmacy</h2>
+        <form>
+            <label for="medications">Medications:</label>
+            <input type="text" id="medications">
+            <p>Pharmacy Fee: $200</p>
+            <button type="button" onclick="proceedToSurgery()">Send to Surgery</button>
+        </form>
+    </div>
+
+    <!-- Surgery Section -->
+    <div class="section" id="surgery">
+        <h2>Surgery</h2>
+        <form>
+            <label for="surgeryDetails">Surgery Performed:</label>
+            <input type="text" id="surgeryDetails">
+            <p>Surgery Fee: $500</p>
+            <button type="button" onclick="completeTreatment()">Complete Treatment</button>
+        </form>
+    </div>
+
+    <!-- Receipt Section -->
+    <div class="section receipt" id="receipt">
+        <h2>Receipt</h2>
+        <p id="receiptDetails"></p>
+        <div class="total" id="totalAmount"></div>
+    </div>
+
+</div>
+
+<footer class="footer">
+  
+</footer>
+
+<script>
+// Store data temporarily for use across services
+let patientData = {};
+let totalAmount = 0;
+const fees = {
+    consultation: 50,
+    labTests: 100,
+    orthopedics: 150,
+    injection: 30,
+    pharmacy: 200,
+    surgery: 500
+};
+
+// Register the patient and store their data, including admission time
+function registerPatient() {
+    const name = document.getElementById('patientName').value;
+    const age = document.getElementById('patientAge').value;
+    const gender = document.getElementById('patientGender').value;
+    const condition = document.getElementById('patientCondition').value;
+    const doctor = document.getElementById('assignedDoctor').value;
+    const admissionTime = new Date().toLocaleString();
+
+    patientData = {
+        name: name,
+        age: age,
+        gender: gender,
+        condition: condition,
+        doctor: doctor,
+        admissionTime: admissionTime,
+        services: []
+    };
+
+    alert(`Patient Registered: \nName: ${name}\nAge: ${age}\nGender: ${gender}\nCondition: ${condition}\nAssigned Doctor: ${doctor}\nAdmission Time: ${admissionTime}`);
+}
+
+// Proceed from Consultation Room to Lab and add consultation fee
+function proceedToLab() {
+    patientData.services.push({ service: 'Consultation', fee: fees.consultation });
+    totalAmount += fees.consultation;
+    alert(`Sending ${patientData.name} to Lab for further tests.\nConsultation Fee: $${fees.consultation}`);
+}
+
+// Proceed from Lab to Orthopedics and add lab test fee
+function proceedToOrthopedics() {
+    const labTests = document.getElementById('labTests').value;
+    patientData.labTests = labTests;
+    patientData.services.push({ service: 'Lab Tests', fee: fees.labTests });
+    totalAmount += fees.labTests;
+    alert(`Lab Tests for ${patientData.name}: ${labTests}\nLab Test Fee: $${fees.labTests}\nSending to Orthopedics.`);
+}
+
+// Proceed from Orthopedics to Injection Room and add orthopedic fee
+function proceedToInjectionRoom() {
+    const orthopedicsTreatment = document.getElementById('orthopedicsTreatment').value;
+    patientData.orthopedicsTreatment = orthopedicsTreatment;
+    patientData.services.push({ service: 'Orthopedic Treatment', fee: fees.orthopedics });
+    totalAmount += fees.orthopedics;
+    alert(`Orthopedic Treatment for ${patientData.name}: ${orthopedicsTreatment}\nOrthopedic Fee: $${fees.orthopedics}\nSending to Injection Room.`);
+}
+
+// Proceed from Injection Room to Pharmacy and add injection fee
+function proceedToPharmacy() {
+    const injection = document.getElementById('injection').value;
+    patientData.injection = injection;
+    patientData.services.push({ service: 'Injection', fee: fees.injection });
+    totalAmount += fees.injection;
+    alert(`Injection Administered: ${injection}\nInjection Fee: $${fees.injection}\nSending to Pharmacy.`);
+}
+
+// Proceed from Pharmacy to Surgery and add pharmacy fee
+function proceedToSurgery() {
+    const medications = document.getElementById('medications').value;
+    patientData.medications = medications;
+    patientData.services.push({ service: 'Pharmacy', fee: fees.pharmacy });
+    totalAmount += fees.pharmacy;
+    alert(`Medications Prescribed: ${medications}\nPharmacy Fee: $${fees.pharmacy}\nSending to Surgery.`);
+}
+
+// Proceed from Surgery to complete the treatment and add surgery fee
+function completeTreatment() {
+    const surgeryDetails = document.getElementById('surgeryDetails').value;
+    patientData.surgeryDetails = surgeryDetails;
+    patientData.services.push({ service: 'Surgery', fee: fees.surgery });
+    totalAmount += fees.surgery;
+    alert(`Surgery Performed: ${surgeryDetails}\nSurgery Fee: $${fees.surgery}\nTreatment Completed for ${patientData.name}.`);
+    generateReceipt();
+}
+
+// Generate and display receipt
+function generateReceipt() {
+    const receiptSection = document.getElementById('receipt');
+    const receiptDetails = document.getElementById('receiptDetails');
+    const totalAmountElem = document.getElementById('totalAmount');
+
+    let receiptContent = `<p>Patient Name: ${patientData.name}</p>`;
+    receiptContent += `<p>Admission Time: ${patientData.admissionTime}</p>`;
+    receiptContent += `<p>Services Rendered:</p><ul>`;
+    patientData.services.forEach(service => {
+        receiptContent += `<li>${service.service}: $${service.fee}</li>`;
+    });
+    receiptContent += `</ul>`;
+
+    receiptDetails.innerHTML = receiptContent;
+    totalAmountElem.innerHTML = `<strong>Total Amount Due: $${totalAmount}</strong>`;
+
+    receiptSection.style.display = 'block';
+}
+
+</script>
+
+</body>
+</html>
